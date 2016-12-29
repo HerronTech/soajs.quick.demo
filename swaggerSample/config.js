@@ -15,12 +15,12 @@ var services = {
 	"extKeyRequired": false,
 	"session": false,
 	"oauth": false,
-	"logger": false,
+	"logger": true,
 	"inputmask": true,
-	"cookieParser": false,
-	"methodOverride": false,
-	"awareness": false,
-	"bodyParser": false,
+	"cookieParser": true,
+	"methodOverride": true,
+	"awareness": true,
+	"bodyParser": true,
 	"errors": {
 		400: "Error connecting to the database",
 		401: "invalid id",
@@ -35,7 +35,7 @@ var services = {
 			}
 		},
 		"get": {
-			"/list": {
+			"/": {
 				"_apiInfo": {
 					"l": "get item form a specified cart",
 					"group": "users",
@@ -58,7 +58,7 @@ var services = {
 			}
 		},
 		"post": {
-			"/sss": {
+			"/": {
 				"_apiInfo": {
 					"l": "set a cart",
 					"group": "users"
@@ -83,9 +83,7 @@ var services = {
 									"properties": {
 										"productId": {
 											"type": "string",
-											"required": true,
-											"minLength": 8,
-											"maxLength": 8
+											"required": true
 										},
 										"price": {
 											"type": "number",
