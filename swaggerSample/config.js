@@ -6,6 +6,7 @@ var services = {
 		"cpu": '',
 		"memory": ''
 	},
+	"swagger": true,
 	"serviceName": "swaggerSample",
 	"serviceGroup": "sample",
 	"serviceVersion": 1,
