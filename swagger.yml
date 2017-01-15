@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  description: Move your app forward with SOAJS
+  version: 1.0.0
+  title: Swagger sample
+host: localhost
+basePath: /swaggerSample
+schemes:
+- http
+produces:
+- application/json
+paths:
+  /:
+    get:
+      tags:
+      - Products
+      summary: Product Types
+      operationId: Get a product
+      parameters:
+      - name: userId
+        in: query
+        description: get a user
+        type: integer
+        required: true
+        format: int32
+      - name: key
+        in: header
+        description: API key
+        required: false
+        type: string
+        format: string
+      - name: soajsauth
+        in: header
+        description: API auth
+        required: false
+        type: string
+        format: string
+      responses:
+        200:
+          description: A product values
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/error"
+    post:
+      tags:
+      - Products
+      summary: Product Types
+      operationId: post a product
+      parameters:
+        - name: items
+          in: body
+          required: true
+          description: items of the user
+          schema:
+            properties:
+              items:
+                type: array
+                items:
+                  $ref: '#/definitions/item'
+        - name: userId
+          in: query
+          description: get a user
+          type: integer
+          required: true
+          format: int32
+        - name: key
+          in: header
+          description: API key
+          required: false
+          type: string
+          format: string
+        - name: soajsauth
+          in: header
+          description: API auth
+          required: false
+          type: string
+          format: string
+      responses:
+        200:
+          description: added successfully
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/error"
+definitions:
+  Product:
+    type: object
+  error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+  item:
+    type: object
+    description: A shorter version of User for likes array
+    properties:
+      productId:
+        type: string
+      price:
+        type: number
+      currency:
+        type: string
+      quantity:
+        type: integer

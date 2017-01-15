@@ -68,7 +68,7 @@ var services = {
 				"imfv": {
 					"custom": {
 						"userId": {
-							"source": ['body.userId'],
+							"source": ['query.userId'],
 							"required": true,
 							"validation": {
 								"type": "integer"
