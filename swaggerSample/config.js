@@ -1,7 +1,6 @@
 'use strict';
-var services = {
+var config = {
 	"type": "service",
-	"dbs": [],
 	"prerequisites": {
 		"cpu": '',
 		"memory": ''
@@ -14,14 +13,6 @@ var services = {
 	"requestTimeout": 30,
 	"requestTimeoutRenewal": 5,
 	"extKeyRequired": false,
-	"session": false,
-	"oauth": false,
-	"logger": true,
-	"inputmask": true,
-	"cookieParser": true,
-	"methodOverride": true,
-	"awareness": true,
-	"bodyParser": true,
 	"errors": {
 		400: "Error connecting to the database",
 		401: "invalid id",
@@ -68,7 +59,7 @@ var services = {
 				"imfv": {
 					"custom": {
 						"userId": {
-							"source": ['query.userId'],
+							"source": ['body.userId'],
 							"required": true,
 							"validation": {
 								"type": "integer"
@@ -112,4 +103,4 @@ var services = {
 		}
 	}
 };
-module.exports = services;
+module.exports = config;
