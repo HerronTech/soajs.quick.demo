@@ -5,6 +5,7 @@ var config = {
 		"cpu": '',
 		"memory": ''
 	},
+	"dbs": [],
 	"swagger": true,
 	"serviceName": "swaggerSample",
 	"serviceGroup": "sample",

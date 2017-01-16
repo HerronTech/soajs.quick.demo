@@ -6,9 +6,11 @@ info:
 host: localhost
 basePath: /swaggerSample
 schemes:
-- http
+- "http"
+consumes:
+- "application/json"
 produces:
-- application/json
+- "application/json"
 paths:
   /:
     get:
@@ -52,7 +54,7 @@ paths:
       summary: Product Types
       operationId: post a product
       parameters:
-        - name: items
+        - name: newProduct
           in: body
           required: true
           description: items of the user
@@ -62,12 +64,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/item'
-        - name: userId
-          in: query
-          description: get a user
-          type: integer
-          required: true
-          format: int32
         - name: key
           in: header
           description: API key
@@ -100,7 +96,7 @@ definitions:
         type: string
   item:
     type: object
-    description: A shorter version of User for likes array
+    description: the product items
     properties:
       productId:
         type: string
