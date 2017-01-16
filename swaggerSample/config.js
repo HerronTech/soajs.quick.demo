@@ -6,7 +6,13 @@ var config = {
 		"memory": ''
 	},
 	"swagger": true,
-	"dbs": [],
+	"dbs": [
+		{
+			prefix: "",
+			name: "swaggerSampleDB",
+			multitenant: false,
+			es: false
+		}],
 	"serviceName": "swaggerSample",
 	"serviceGroup": "sample",
 	"serviceVersion": 1,
