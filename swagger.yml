@@ -17,14 +17,8 @@ paths:
       tags:
       - Products
       summary: Product Types
-      operationId: Get a product
+      operationId: Get all products
       parameters:
-      - name: userId
-        in: query
-        description: get a user
-        type: integer
-        required: true
-        format: int32
       - name: key
         in: header
         description: API key
@@ -52,7 +46,7 @@ paths:
       tags:
       - Products
       summary: Product Types
-      operationId: post a product
+      operationId: add a product
       parameters:
         - name: newProduct
           in: body
@@ -96,8 +90,11 @@ definitions:
         type: string
   item:
     type: object
-    description: the product items
+    description: the items of a product
     properties:
+      userId:
+        type: integer
+        format: int32
       productId:
         type: string
       price:

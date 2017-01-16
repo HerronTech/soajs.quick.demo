@@ -6,6 +6,7 @@ var config = {
 		"memory": ''
 	},
 	"swagger": true,
+	"dbs": [],
 	"serviceName": "swaggerSample",
 	"serviceGroup": "sample",
 	"serviceVersion": 1,
@@ -29,24 +30,11 @@ var config = {
 		"get": {
 			"/": {
 				"_apiInfo": {
-					"l": "get item form a specified cart",
+					"l": "get users",
 					"group": "users",
 					"groupMain": true
 				},
-				"mw": __dirname + "/lib/mw/get.js",
-				"imfv": {
-					"custom": {
-						"userId": {
-							"source": ['query.userId'],
-							"required": true,
-							"validation": {
-								"type": "integer"
-							}
-						}
-					}
-					
-				}
-				
+				"mw": __dirname + "/lib/mw/get.js"
 			}
 		},
 		"post": {
@@ -58,13 +46,6 @@ var config = {
 				"mw": __dirname + "/lib/mw/post.js",
 				"imfv": {
 					"custom": {
-						"userId": {
-							"source": ['body.userId'],
-							"required": true,
-							"validation": {
-								"type": "integer"
-							}
-						},
 						"items": {
 							"source": ['body.items'],
 							"required": true,
@@ -73,6 +54,11 @@ var config = {
 								"items": {
 									"type": "object",
 									"properties": {
+										"userId":{
+											"type": "integer",
+											"required": true,
+											"format": "int32"
+										},
 										"productId": {
 											"type": "string",
 											"required": true
