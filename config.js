@@ -11,7 +11,7 @@ var config = {
 			prefix: "",
 			name: "swaggerSampleDB",
 			multitenant: false,
-			es: false
+			model: "mongo"
 		}],
 	"serviceName": "swaggerSample",
 	"serviceGroup": "sample",
