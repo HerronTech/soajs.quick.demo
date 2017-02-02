@@ -16,11 +16,11 @@ paths:
     get:
       tags:
       - Products
-      summary: Product Types
-      operationId: Get all products
+      summary: get all products
+      operationId: get
       parameters:
       - name: key
-        in: header
+        in: header;
         description: API key
         required: false
         type: string
@@ -45,8 +45,8 @@ paths:
     post:
       tags:
       - Products
-      summary: Product Types
-      operationId: add a product
+      summary: add a product
+      operationId: post
       parameters:
         - name: newProduct
           in: body
