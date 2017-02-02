@@ -2,9 +2,9 @@ swagger: "2.0"
 info:
   description: Move your app forward with SOAJS
   version: 1.0.0
-  title: Swagger sample
+  title: My Service
 host: localhost
-basePath: /swaggerSample
+basePath: /myService
 schemes:
 - "http"
 consumes:
