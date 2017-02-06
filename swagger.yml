@@ -2,9 +2,9 @@ swagger: "2.0"
 info:
   description: Move your app forward with SOAJS
   version: 1.0.0
-  title: My Service
+  title: Swagger sample
 host: localhost
-basePath: /myService
+basePath: /swaggerTestSample
 schemes:
 - "http"
 consumes:
@@ -16,21 +16,8 @@ paths:
     get:
       tags:
       - Products
-      summary: get all products
-      operationId: get
-      parameters:
-      - name: key
-        in: header;
-        description: API key
-        required: false
-        type: string
-        format: string
-      - name: soajsauth
-        in: header
-        description: API auth
-        required: false
-        type: string
-        format: string
+      summary: Get all products
+      operationId: Get
       responses:
         200:
           description: A product values
@@ -48,7 +35,7 @@ paths:
       summary: add a product
       operationId: post
       parameters:
-        - name: newProduct
+        - name: items
           in: body
           required: true
           description: items of the user
@@ -58,18 +45,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/item'
-        - name: key
-          in: header
-          description: API key
-          required: false
-          type: string
-          format: string
-        - name: soajsauth
-          in: header
-          description: API auth
-          required: false
-          type: string
-          format: string
       responses:
         200:
           description: added successfully

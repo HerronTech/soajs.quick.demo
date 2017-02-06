@@ -1,117 +1,98 @@
-"use strict";
-module.exports = {
-  "type": "service",
-  "prerequisites": {
-    "cpu": " ",
-    "memory": " "
-  },
-  "swagger": true,
-  "dbs": [
-    {
-      "name": "myDb",
-      "model": "mongo",
-      "multitenant": false
-    }
-  ],
-  "serviceName": "myService",
-  "serviceGroup": "myGroup",
-  "serviceVersion": 1,
-  "servicePort": 4265,
-  "requestTimeout": 30,
-  "requestTimeoutRenewal": 5,
-  "extKeyRequired": true,
-  "oauth": false,
-  "session": true,
-  "errors": {},
-  "schema": {
-    "get": {
-      "/": {
-        "_apiInfo": {
-          "l": "get all products",
-          "group": "Products"
-        },
-        "mw": __dirname + "/lib/mw/_get.js",
-        "key": {
-          "required": false,
-          "source": [
-            "header;.key"
-          ],
-          "validation": {
-            "type": "string",
-            "format": "string"
-          }
-        },
-        "soajsauth": {
-          "required": false,
-          "source": [
-            "headers.soajsauth"
-          ],
-          "validation": {
-            "type": "string",
-            "format": "string"
-          }
-        }
-      }
-    },
-    "post": {
-      "/": {
-        "_apiInfo": {
-          "l": "add a product",
-          "group": "Products"
-        },
-        "mw": __dirname + "/lib/mw/_post.js",
-        "newProduct": {
-          "required": true,
-          "source": [
-            "body.newProduct"
-          ],
-          "validation": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "description": "the items of a product",
-              "properties": {
-                "userId": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "currency": {
-                  "type": "string"
-                },
-                "quantity": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        },
-        "key": {
-          "required": false,
-          "source": [
-            "headers.key"
-          ],
-          "validation": {
-            "type": "string",
-            "format": "string"
-          }
-        },
-        "soajsauth": {
-          "required": false,
-          "source": [
-            "headers.soajsauth"
-          ],
-          "validation": {
-            "type": "string",
-            "format": "string"
-          }
-        }
-      }
-    }
-  }
+'use strict';
+var config = {
+	"type": "service",
+	"prerequisites": {
+		"cpu": '',
+		"memory": ''
+	},
+	"swagger": true,
+	"dbs": [
+		{
+			prefix: "",
+			name: "swaggerSampleDB",
+			multitenant: false,
+			model: "mongo"
+		}],
+	"serviceName": "swaggerTestSample",
+	"serviceGroup": "sample",
+	"serviceVersion": 1,
+	"servicePort": 4062,
+	"requestTimeout": 30,
+	"requestTimeoutRenewal": 5,
+	"extKeyRequired": false,
+	"errors": {
+		400: "Error connecting to the database",
+		401: "invalid id",
+		402: "missing required field"
+	},
+	"schema": {
+		"commonFields": { //this shows that we can have common fields, but in this example we don't need it.
+			"id": {
+				"source": ['query.id'],
+				"required": true,
+				"validation": {"type": "string"}
+			}
+		},
+		"get": {
+			"/": {
+				"_apiInfo": {
+					"l": "get users",
+					"group": "users",
+					"groupMain": true
+				},
+				"mw": __dirname + "/lib/mw/_get.js"
+			}
+		},
+		"post": {
+			"/": {
+				"_apiInfo": {
+					"l": "set a cart",
+					"group": "users"
+				},
+				"mw": __dirname + "/lib/mw/_post.js",
+				"imfv": {
+					"custom": {
+						"items": {
+							"source": ['body.items'],
+							"required": true,
+							"validation": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"userId":{
+											"type": "integer",
+											"required": true,
+											"format": "int32"
+										},
+										"productId": {
+											"type": "string",
+											"required": true
+										},
+										"price": {
+											"type": "number",
+											"required": true,
+											"minimum": 0
+										},
+										"currency": {
+											"type": "string",
+											"required": true
+										},
+										"quantity": {
+											"type": "integer",
+											"required": true,
+											"minimum": 1
+										}
+									}
+								},
+								"minItems": 1,
+								"uniqueItems": true
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 };
+module.exports = config;
