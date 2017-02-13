@@ -11,7 +11,7 @@ var config = {
 			prefix: "",
 			name: "swaggerSampleDB",
 			multitenant: false,
-			model: "mongo"
+			mongo: true
 		}],
 	"serviceName": "swaggerTestSample",
 	"serviceGroup": "sample",
@@ -19,6 +19,11 @@ var config = {
 	"servicePort": 4062,
 	"requestTimeout": 30,
 	"requestTimeoutRenewal": 5,
+	"injection": true,
+	"models": {
+		"path": __dirname + "/lib/models/",
+		"name": "mongo"
+	},
 	"extKeyRequired": false,
 	"errors": {
 		400: "Error connecting to the database",
@@ -26,13 +31,6 @@ var config = {
 		402: "missing required field"
 	},
 	"schema": {
-		"commonFields": { //this shows that we can have common fields, but in this example we don't need it.
-			"id": {
-				"source": ['query.id'],
-				"required": true,
-				"validation": {"type": "string"}
-			}
-		},
 		"get": {
 			"/": {
 				"_apiInfo": {
