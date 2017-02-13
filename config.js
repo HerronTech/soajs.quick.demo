@@ -11,7 +11,7 @@ var config = {
 			prefix: "",
 			name: "swaggerSampleDB",
 			multitenant: false,
-			model: "mongo"
+			mongo: true
 		}],
 	"serviceName": "swaggerTestSample",
 	"serviceGroup": "sample",
@@ -20,6 +20,10 @@ var config = {
 	"requestTimeout": 30,
 	"requestTimeoutRenewal": 5,
 	"injection": true,
+	"models": {
+		"path": __dirname + "/lib/models/",
+		"name": "mongo"
+	},
 	"extKeyRequired": false,
 	"errors": {
 		400: "Error connecting to the database",
