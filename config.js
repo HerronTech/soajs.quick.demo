@@ -19,6 +19,7 @@ var config = {
 	"servicePort": 4062,
 	"requestTimeout": 30,
 	"requestTimeoutRenewal": 5,
+	"injection": true,
 	"extKeyRequired": false,
 	"errors": {
 		400: "Error connecting to the database",
