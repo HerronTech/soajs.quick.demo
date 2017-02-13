@@ -2,7 +2,7 @@
 var assert = require('assert');
 var helper = require("../helper.js");
 
-describe("myService Unit Test Cases", function () {
+describe("finalService Integration Test Cases", function () {
 
 	before(function (done) {
         console.log("==============>");
