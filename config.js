@@ -31,13 +31,6 @@ var config = {
 		402: "missing required field"
 	},
 	"schema": {
-		"commonFields": { //this shows that we can have common fields, but in this example we don't need it.
-			"id": {
-				"source": ['query.id'],
-				"required": true,
-				"validation": {"type": "string"}
-			}
-		},
 		"get": {
 			"/": {
 				"_apiInfo": {
