@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"core_provision.products"},{"v":1,"unique":true,"key":{"code":1},"name":"code_1","ns":"core_provision.products"},{"v":1,"key":{"packages.code":1},"name":"packages.code_1","ns":"core_provision.products"},{"v":1,"key":{"code":1,"packages.code":1},"name":"code_1_packages.code_1","ns":"core_provision.products"}]}

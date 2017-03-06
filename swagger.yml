@@ -1,80 +1,116 @@
 swagger: "2.0"
 info:
-  description: Move your app forward with SOAJS
-  version: 1.0.0
-  title: Swagger sample
+  version: "1.0.0"
+  title: SOAJS Demo
 host: localhost
-basePath: /swaggerTestSample
+basePath: /serviceDemo
 schemes:
-- "http"
-consumes:
-- "application/json"
-produces:
-- "application/json"
+  - http
 paths:
-  /:
-    get:
-      tags:
-      - Products
-      summary: Get all products
-      operationId: Get
-      responses:
-        200:
-          description: A product values
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Product"
-        default:
-          description: Unexpected error
-          schema:
-            $ref: "#/definitions/error"
+  /user:
     post:
       tags:
-      - Products
-      summary: add a product
-      operationId: post
+        - user
+      summary: Create user
       parameters:
-        - name: items
-          in: body
+        - in: body
+          name: user
+          description: Created user object
           required: true
-          description: items of the user
           schema:
-            properties:
-              items:
-                type: array
-                items:
-                  $ref: '#/definitions/item'
+            $ref: "#/definitions/item"
       responses:
         200:
-          description: added successfully
-        default:
-          description: Unexpected error
-          schema:
-            $ref: "#/definitions/error"
+          description: successful operation
+        400:
+          description: unsuccessful update
+        600:
+          description: couldn't establish connection to database
+    get:
+      tags:
+        - user
+      summary: get user by id
+      parameters:
+        - in: query
+          name: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: user id not found
+        600:
+          description: couldn't establish connection to database
+    delete:
+      tags:
+        - user
+      summary: delete a user by Id
+      parameters:
+        - $ref: "#/parameters/id"
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: user id not found
+        600:
+          description: couldn't establish connection to database
+    put:
+      tags:
+        - user
+      summary: Update user
+      parameters:
+        - $ref: "#/parameters/user"
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: unsuccessful update
+        600:
+          description: couldn't establish connection to database
+parameters:
+  id:
+    in: query
+    name: id
+    required: true
+    type: integer
+    format: int64
+  user:
+    in: body
+    name: user
+    description: Created user object
+    required: true
+    schema:
+      $ref: "#/definitions/item"
 definitions:
-  Product:
-    type: object
-  error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
   item:
     type: object
-    description: the items of a product
+    required: [id, username, email]
     properties:
-      userId:
+      id:
         type: integer
-        format: int32
-      productId:
+        format: int64
+      username:
         type: string
-      price:
-        type: number
-      currency:
+        minLength: 4
+        maxLength: 8
+        pattern: /^[a-zA-Z][0-9a-zA-Z_\-]+$/
+      firstName:
         type: string
-      quantity:
-        type: integer
+      lastName:
+        type: string
+      email:
+        type: array
+        items:
+          type: object
+          required: [address, primary]
+          minItems: 1
+          maxItems: 6
+          uniqueItems: true
+          properties:
+            address:
+              type: string
+              format: email
+            primary:
+              type: boolean

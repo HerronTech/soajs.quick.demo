@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"core_provision.oauth_token"},{"v":1,"key":{"token":1,"type":1},"name":"token_1_type_1","ns":"core_provision.oauth_token"}]}

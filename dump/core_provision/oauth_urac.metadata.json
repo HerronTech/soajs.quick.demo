@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"core_provision.oauth_urac"},{"v":1,"unique":true,"key":{"userId":1},"name":"userId_1","ns":"core_provision.oauth_urac"},{"v":1,"key":{"tId":1,"_id":1},"name":"tId_1__id_1","ns":"core_provision.oauth_urac"},{"v":1,"key":{"tId":1,"userId":1,"_id":1},"name":"tId_1_userId_1__id_1","ns":"core_provision.oauth_urac"}]}
