@@ -48,90 +48,28 @@ module.exports = {
         },
         "mw": __dirname + "/lib/mw/user_post.js",
         "imfv": {
-          "custom": {
-            "user": {
-              "required": true,
-              "source": [
-                "body.user"
-              ],
-              "validation": {
-                "type": "object",
-                "required": [
-                  "id",
-                  "username",
-                  "email"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "username": {
-                    "type": "string",
-                    "minLength": 4,
-                    "maxLength": 8,
-                    "pattern": "/^[a-zA-Z][0-9a-zA-Z_\\-]+$/"
-                  },
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "address",
-                        "primary"
-                      ],
-                      "minItems": 1,
-                      "maxItems": 6,
-                      "uniqueItems": true,
-                      "properties": {
-                        "address": {
-                          "type": "string",
-                          "format": "email"
-                        },
-                        "primary": {
-                          "type": "boolean"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+	      "commonFields": [
+		    "user"
+	      ]
         }
       }
     },
     "get": {
-      "/user": {
+      "/user/:id": {
         "_apiInfo": {
           "l": "get user by id",
           "group": "user"
         },
         "mw": __dirname + "/lib/mw/user_get.js",
         "imfv": {
-          "custom": {
-            "id": {
-              "required": true,
-              "source": [
-                "query.id"
-              ],
-              "validation": {
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
+          "commonFields": [
+	        "id"
+          ]
         }
       }
     },
     "delete": {
-      "/user": {
+      "/user/:id": {
         "_apiInfo": {
           "l": "delete a user by Id",
           "group": "user"
@@ -145,7 +83,7 @@ module.exports = {
       }
     },
     "put": {
-      "/user": {
+      "/user/:id": {
         "_apiInfo": {
           "l": "Update user",
           "group": "user"
@@ -153,7 +91,8 @@ module.exports = {
         "mw": __dirname + "/lib/mw/user_put.js",
         "imfv": {
           "commonFields": [
-            "user"
+            "user",
+	        "id"
           ]
         }
       }
@@ -162,7 +101,7 @@ module.exports = {
       "id": {
         "required": true,
         "source": [
-          "query.id"
+          "params.id"
         ],
         "validation": {
           "type": "integer",
@@ -177,15 +116,10 @@ module.exports = {
         "validation": {
           "type": "object",
           "required": [
-            "id",
             "username",
             "email"
           ],
           "properties": {
-            "id": {
-              "type": "integer",
-              "format": "int64"
-            },
             "username": {
               "type": "string",
               "minLength": 4,
