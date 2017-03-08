@@ -72,8 +72,7 @@ parameters:
     in: path
     name: id
     required: true
-    type: integer
-    format: int64
+    type: string
   user:
     in: body
     name: user

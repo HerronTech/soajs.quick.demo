@@ -32,7 +32,7 @@ module.exports = {
   "requestTimeoutRenewal": 5,
   "extKeyRequired": true,
   "injection": true,
-  "oauth": true,
+  "oauth": false,
   "session": true,
   "errors": {
     "400": "unsuccessful update",
@@ -104,8 +104,7 @@ module.exports = {
           "params.id"
         ],
         "validation": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         }
       },
       "user": {
