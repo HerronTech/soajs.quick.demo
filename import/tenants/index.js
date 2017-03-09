@@ -139,8 +139,10 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"model": "mongo",
-								"MT": true
+								"demo": {
+									"model": "mongo",
+									"MT": true
+								}
 							}
 						}
 					}
