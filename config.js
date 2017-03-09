@@ -9,15 +9,15 @@ module.exports = {
   "dbs": [
     {
       "prefix": "",
-      "name": "demo_SA",
-      "mongo": true,
-      "multitenant": false
-    },
-    {
-      "prefix": "",
       "name": "demo_MT",
       "mongo": true,
       "multitenant": true
+    },
+    {
+      "prefix": "",
+      "name": "demo_SA",
+      "mongo": true,
+      "multitenant": false
     }
   ],
   "models": {
@@ -123,7 +123,7 @@ module.exports = {
               "type": "string",
               "minLength": 4,
               "maxLength": 8,
-              "pattern": "/^[a-zA-Z][0-9a-zA-Z_\\-]+$/"
+              "pattern": "^[a-zA-Z][0-9a-zA-Z_\-]+$"
             },
             "firstName": {
               "type": "string"
