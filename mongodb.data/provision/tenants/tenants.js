@@ -117,7 +117,7 @@ var tenants = [
 		"type": "client",
 		"code": "DET3",
 		"name": "Demo tenant 4",
-		"description": "This tenant uses package 3 that has 4 private APIs with a multitenant mongo database.",
+		"description": "This tenant uses package 2 that has 4 private APIs with a multitenant mongo database.",
 		"oauth": {},
 		"applications": [
 			{
@@ -153,7 +153,7 @@ var tenants = [
 		"type": "client",
 		"code": "DET4",
 		"name": "Demo tenant 5",
-		"description": "This tenant uses package 3 that has 4 private APIs with a multitenant mongo database.",
+		"description": "This tenant uses package 2 that has 4 private APIs with a multitenant mongo database.",
 		"oauth": {},
 		"applications": [
 			{
