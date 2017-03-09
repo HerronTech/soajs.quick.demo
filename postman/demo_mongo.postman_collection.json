@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "http://127.0.0.1:4000/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/demoservice/user",
 			"request": {
-				"url": "http://127.0.0.1:4000/demoservice/user/0",
+				"url": "http://dev-api.mydomain.com:81/demoservice/user/0",
 				"method": "GET",
 				"header": [
 					{
@@ -33,9 +33,9 @@
 			"response": []
 		},
 		{
-			"name": "http://127.0.0.1:4000/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/demoservice/user",
 			"request": {
-				"url": "http://127.0.0.1:4000/demoservice/user",
+				"url": "http://dev-api.mydomain.com:81/demoservice/user",
 				"method": "POST",
 				"header": [
 					{

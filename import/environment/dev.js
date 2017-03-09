@@ -3,7 +3,7 @@ var dev = {
 	"domain": "mydomain.com",
 	"sitePrefix": "dev",
 	"apiPrefix": "dev-api",
-	"port": 80,
+	"port": 81,
 	"profile": "/opt/soajs/FILES/profiles/profile.js",
 	"description": "this is the DEV environment",
 	"dbs": {
@@ -32,7 +32,7 @@ var dev = {
 			},
 			"demo_MT": {
 				"cluster": "dev_cluster",
-				"tenantSpecific": false
+				"tenantSpecific": true
 			}
 		}
 	}
