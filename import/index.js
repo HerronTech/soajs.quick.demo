@@ -75,9 +75,6 @@ var lib = {
 			if (ops.prefix) {
 				dbconfig.prefix = ops.prefix;
 			}
-			if (!ops.prefix && (ops.patch.toLowerCase() === "true")){
-				dbconfig.prefix = "";
-			}
 			if (ops.host) {
 				dbconfig.servers[0].host = ops.host;
 			}
@@ -101,7 +98,7 @@ var lib = {
 			writeStream.end();
 			
 			setTimeout(function () {
-				var execString = "node " + __dirname + "/data/" + ops.file + "/dataTmp.js";
+				var execString = "chmod +x dataTmp.js && " + "node " + __dirname + "/dataTmp.js";
 				exec(execString, cb);
 				
 			}, 1000);

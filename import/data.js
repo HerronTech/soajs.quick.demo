@@ -15,8 +15,8 @@ function generateExternalKey(opts, cb){
 		"package": opts.package
 	};
 	var config = {
-		algorithm: "aes256",
-		password: opts.secret
+			algorithm: "aes256",
+			password: opts.secret.password
 	};
 	
 	module.generateExternalKey(key, tenant, application, config, function (error, extKey) {
@@ -109,7 +109,7 @@ function addTenants(cb) {
 					oneKey.extKeys[0].extKey = externalKey;
 					count ++;
 					
-					if (count === tenant.length){
+					if (count === tenants.length){
 						storeTenants();
 					}
 				});

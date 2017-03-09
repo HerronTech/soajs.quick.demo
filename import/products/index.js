@@ -1,5 +1,4 @@
 var devProducts = {
-	"_id": '58b98e9a4cbbb04403437fcc',
 	"code": "DEV",
 	"name": "Dev Product",
 	"description": "This is a product for a demo",
