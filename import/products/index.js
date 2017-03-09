@@ -28,7 +28,7 @@ var devProducts = {
 						"apisPermission": "restricted",
 						"get": {
 							"apis": {
-								"/user": {
+								"/user/:id": {
 									"access": false
 								}
 							}
