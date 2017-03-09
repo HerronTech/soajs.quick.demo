@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "demo_memory",
+		"_postman_id": "15eeef91-c84b-87f9-2029-c45b2d50d352",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:4000/demoservice/user",
+			"request": {
+				"url": "http://127.0.0.1:4000/demoservice/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"username\": \"john1\",\n\t\t\"firstName\": \"john\",\n\t\t\"lastName\": \"doe\",\n\t\t\"email\": [\n\t\t\t{\n\t\t\t\t\"address\": \"michel@soajs.org\",\n\t\t\t\t\"primary\": true\n\t\t\t}\n\t\t]\n\t}\n}"
+				},
+				"description": "insert user in the memory"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:4000/demoservice/user",
+			"request": {
+				"url": "http://127.0.0.1:4000/demoservice/user/0",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"username\": \"john1\",\n\t\t\"firstName\": \"john\",\n\t\t\"lastName\": \"doe\",\n\t\t\"email\": [\n\t\t\t{\n\t\t\t\t\"address\": \"michel@soajs.org\",\n\t\t\t\t\"primary\": true\n\t\t\t}\n\t\t]\n\t}\n}"
+				},
+				"description": "get user from the memory"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:4000/demoservice/user",
+			"request": {
+				"url": "http://127.0.0.1:4000/demoservice/user/0",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"username\": \"john2\",\n\t\t\"firstName\": \"john\",\n\t\t\"lastName\": \"doe\",\n\t\t\"email\": [\n\t\t\t{\n\t\t\t\t\"address\": \"michel@soajs.org\",\n\t\t\t\t\"primary\": true\n\t\t\t}\n\t\t]\n\t}\n}"
+				},
+				"description": "update existing user in the memory"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:4000/demoservice/user",
+			"request": {
+				"url": "http://127.0.0.1:4000/demoservice/user/0",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "delete user from the memory"
+			},
+			"response": []
+		}
+	]
+}
