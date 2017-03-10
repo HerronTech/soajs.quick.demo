@@ -1,15 +1,16 @@
 {
-  "name": "demoservice",
+  "name": "soajs.quick.demo",
   "description": "",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "soajs team",
+    "email": "team@soajs.org"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:soajs/soajs.examples.git"
   },
+  "license" : "Apache-2.0",
   "engines": {
     "node": "*"
   },
