@@ -24,7 +24,7 @@ module.exports = {
     "path": __dirname + "/lib/models/",
     "name": "mongo"
   },
-  "serviceName": "demoservice",
+  "serviceName": "quickdemo",
   "serviceGroup": "demo",
   "serviceVersion": 1,
   "servicePort": 4387,

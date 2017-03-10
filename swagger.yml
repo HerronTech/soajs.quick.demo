@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: SOAJS Demo
+  title: Quick Demo
 host: localhost
-basePath: /serviceDemo
+basePath: /quickdemo
 schemes:
   - http
 paths:
