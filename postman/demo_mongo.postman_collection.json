@@ -1,0 +1,61 @@
+{
+	"variables": [],
+	"info": {
+		"name": "demo_mongo",
+		"_postman_id": "75b0480c-95c2-b25c-9e64-15064f56843f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"request": {
+				"url": "http://dev-api.mydomain.com:81/demoservice/user/0",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"username\": \"john1\",\n\t\t\"firstName\": \"john\",\n\t\t\"lastName\": \"doe\",\n\t\t\"email\": [\n\t\t\t{\n\t\t\t\t\"address\": \"michel@soajs.org\",\n\t\t\t\t\"primary\": true\n\t\t\t}\n\t\t]\n\t}\n}"
+				},
+				"description": "get user from the memory"
+			},
+			"response": []
+		},
+		{
+			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"request": {
+				"url": "http://dev-api.mydomain.com:81/demoservice/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "key",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"username\": \"john1\",\n\t\t\"firstName\": \"john\",\n\t\t\"lastName\": \"doe\",\n\t\t\"email\": [\n\t\t\t{\n\t\t\t\t\"address\": \"michel@soajs.org\",\n\t\t\t\t\"primary\": true\n\t\t\t}\n\t\t]\n\t}\n}"
+				},
+				"description": "insert user in the memory"
+			},
+			"response": []
+		}
+	]
+}

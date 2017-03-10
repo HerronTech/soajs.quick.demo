@@ -1,7 +1,7 @@
 {
-  "name": "soajs.test.repo",
-  "description": "Move your app forward with SOAJS",
-  "version": "0.0.1",
+  "name": "demoservice",
+  "description": "",
+  "version": "1.0.0",
   "author": {
     "name": "",
     "email": ""
@@ -25,14 +25,14 @@
     "grunt-env": "0.4.4",
     "grunt-istanbul": "0.7.2",
     "grunt-coveralls": "1.0.1",
-    "grunt-soajs": "git+https://github.com/soajs/grunt-soajs.git#develop",
+    "grunt-soajs": "*",
     "jshint": "2.9.4",
-    "lodash": "4.17.4",
     "mocha": "3.2.0",
     "request": "2.79.0",
     "shelljs": "0.7.5"
   },
   "dependencies": {
-    "soajs.composer": "*"
+    "soajs.composer": "*",
+    "lodash": "4.17.4"
   }
 }

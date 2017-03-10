@@ -1,96 +1,161 @@
-'use strict';
-var config = {
-	"type": "service",
-	"prerequisites": {
-		"cpu": '',
-		"memory": ''
-	},
-	"swagger": true,
-	"dbs": [
-		{
-			prefix: "",
-			name: "swaggerSampleDB",
-			multitenant: false,
-			mongo: true
-		}],
-	"serviceName": "swaggerTestSample",
-	"serviceGroup": "sample",
-	"serviceVersion": 1,
-	"servicePort": 4062,
-	"requestTimeout": 30,
-	"requestTimeoutRenewal": 5,
-	"injection": true,
-	"models": {
-		"path": __dirname + "/lib/models/",
-		"name": "mongo"
-	},
-	"extKeyRequired": false,
-	"errors": {
-		400: "Error connecting to the database",
-		401: "invalid id",
-		402: "missing required field"
-	},
-	"schema": {
-		"get": {
-			"/": {
-				"_apiInfo": {
-					"l": "get users",
-					"group": "users",
-					"groupMain": true
-				},
-				"mw": __dirname + "/lib/mw/_get.js"
-			}
-		},
-		"post": {
-			"/": {
-				"_apiInfo": {
-					"l": "set a cart",
-					"group": "users"
-				},
-				"mw": __dirname + "/lib/mw/_post.js",
-				"imfv": {
-					"custom": {
-						"items": {
-							"source": ['body.items'],
-							"required": true,
-							"validation": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"userId":{
-											"type": "integer",
-											"required": true,
-											"format": "int32"
-										},
-										"productId": {
-											"type": "string",
-											"required": true
-										},
-										"price": {
-											"type": "number",
-											"required": true,
-											"minimum": 0
-										},
-										"currency": {
-											"type": "string",
-											"required": true
-										},
-										"quantity": {
-											"type": "integer",
-											"required": true,
-											"minimum": 1
-										}
-									}
-								},
-								"minItems": 1,
-								"uniqueItems": true
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+"use strict";
+module.exports = {
+  "type": "service",
+  "prerequisites": {
+    "cpu": " ",
+    "memory": " "
+  },
+  "swagger": true,
+  "dbs": [
+    {
+      "prefix": "",
+      "name": "demo_MT",
+      "mongo": true,
+      "multitenant": true
+    },
+    {
+      "prefix": "",
+      "name": "demo_SA",
+      "mongo": true,
+      "multitenant": false
+    }
+  ],
+  "models": {
+    "path": __dirname + "/lib/models/",
+    "name": "mongo"
+  },
+  "serviceName": "quickdemo",
+  "serviceGroup": "demo",
+  "serviceVersion": 1,
+  "servicePort": 4387,
+  "requestTimeout": 30,
+  "requestTimeoutRenewal": 5,
+  "extKeyRequired": true,
+  "injection": true,
+  "oauth": false,
+  "session": true,
+  "errors": {
+    "400": "unsuccessful update",
+    "401": "user id not found",
+    "600": "couldn't establish connection to database"
+  },
+  "schema": {
+    "post": {
+      "/user": {
+        "_apiInfo": {
+          "l": "Create user",
+          "group": "user"
+        },
+        "mw": __dirname + "/lib/mw/user_post.js",
+        "imfv": {
+	      "commonFields": [
+		    "user"
+	      ]
+        }
+      }
+    },
+    "get": {
+      "/user/:id": {
+        "_apiInfo": {
+          "l": "get user by id",
+          "group": "user"
+        },
+        "mw": __dirname + "/lib/mw/user_get.js",
+        "imfv": {
+          "commonFields": [
+	        "id"
+          ]
+        }
+      }
+    },
+    "delete": {
+      "/user/:id": {
+        "_apiInfo": {
+          "l": "delete a user by Id",
+          "group": "user"
+        },
+        "mw": __dirname + "/lib/mw/user_delete.js",
+        "imfv": {
+          "commonFields": [
+            "id"
+          ]
+        }
+      }
+    },
+    "put": {
+      "/user/:id": {
+        "_apiInfo": {
+          "l": "Update user",
+          "group": "user"
+        },
+        "mw": __dirname + "/lib/mw/user_put.js",
+        "imfv": {
+          "commonFields": [
+            "user",
+	        "id"
+          ]
+        }
+      }
+    },
+    "commonFields": {
+      "id": {
+        "required": true,
+        "source": [
+          "params.id"
+        ],
+        "validation": {
+          "type": "string"
+        }
+      },
+      "user": {
+        "required": true,
+        "source": [
+          "body.user"
+        ],
+        "validation": {
+          "type": "object",
+          "required": [
+            "username",
+            "email"
+          ],
+          "properties": {
+            "username": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 8,
+              "pattern": "^[a-zA-Z][0-9a-zA-Z_\-]+$"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "address",
+                  "primary"
+                ],
+                "minItems": 1,
+                "maxItems": 6,
+                "uniqueItems": true,
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "primary": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 };
-module.exports = config;
