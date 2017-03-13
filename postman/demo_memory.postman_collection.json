@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/quickdemo/user",
 			"request": {
-				"url": "http://dev-api.mydomain.com:81/demoservice/user",
+				"url": "http://dev-api.mydomain.com:81/quickdemo/user",
 				"method": "POST",
 				"header": [
 					{
@@ -33,9 +33,9 @@
 			"response": []
 		},
 		{
-			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/quickdemo/user",
 			"request": {
-				"url": "http://dev-api.mydomain.com:81/demoservice/user/0",
+				"url": "http://dev-api.mydomain.com:81/quickdemo/user/0",
 				"method": "GET",
 				"header": [
 					{
@@ -58,9 +58,9 @@
 			"response": []
 		},
 		{
-			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/quickdemo/user",
 			"request": {
-				"url": "http://dev-api.mydomain.com:81/demoservice/user/0",
+				"url": "http://dev-api.mydomain.com:81/quickdemo/user/0",
 				"method": "PUT",
 				"header": [
 					{
@@ -83,9 +83,9 @@
 			"response": []
 		},
 		{
-			"name": "http://dev-api.mydomain.com:81/demoservice/user",
+			"name": "http://dev-api.mydomain.com:81/quickdemo/user",
 			"request": {
-				"url": "http://dev-api.mydomain.com:81/demoservice/user/0",
+				"url": "http://dev-api.mydomain.com:81/quickdemo/user/0",
 				"method": "DELETE",
 				"header": [
 					{

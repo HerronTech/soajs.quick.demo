@@ -9,7 +9,7 @@ var devProducts = {
 			"description": "This package contains 4 public APIs: get, delete, post and put",
 			"acl": {
 				"dev": {
-					"demoservice": {
+					"quickdemo": {
 						"access": false
 					}
 				}
@@ -22,7 +22,7 @@ var devProducts = {
 			"description": "This package have access to 2 protected APIs: get and post",
 			"acl": {
 				"dev": {
-					"demoservice": {
+					"quickdemo": {
 						"access": false,
 						"apisPermission": "restricted",
 						"get": {
