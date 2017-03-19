@@ -4,7 +4,7 @@ var mongo = new soajs.mongo(dbconfig);
 
 var keySecurity = "";
 
-function generateExternalKey(opts, cb){
+function generateExternalKey(opts, cb) {
 	var module = require("soajs/modules/soajs.core").key;
 	var key = opts.key;
 	
@@ -15,8 +15,8 @@ function generateExternalKey(opts, cb){
 		"package": opts.package
 	};
 	var config = {
-			algorithm: "aes256",
-			password: opts.secret.password
+		algorithm: "aes256",
+		password: opts.secret.password
 	};
 	
 	module.generateExternalKey(key, tenant, application, config, function (error, extKey) {
@@ -40,8 +40,8 @@ function generateExternalKey(opts, cb){
 
 function cloneEnvironment(cb) {
 	
-	mongo.findOne("environment", {"code": "DASHBOARD"}, function(error, dashboardRecord){
-		if(error){
+	mongo.findOne("environment", {"code": "DASHBOARD"}, function (error, dashboardRecord) {
+		if (error) {
 			return cb(error);
 		}
 		
@@ -62,8 +62,8 @@ function cloneEnvironment(cb) {
 		env.services = dashboardRecord.services;
 		
 		keySecurity = dashboardRecord.services.config.key;
-		mongo.remove("environment", {"code": "DEV"}, function(error){
-			if(error){
+		mongo.remove("environment", {"code": "DEV"}, function (error) {
+			if (error) {
 				return cb(error);
 			}
 			mongo.insert("environment", env, {upsert: true, multi: false, safe: true}, function (error, result) {
@@ -79,12 +79,12 @@ function cloneEnvironment(cb) {
 
 function addProducts(cb) {
 	var products = require('./products/');
-	if (products._id){
+	if (products._id) {
 		products._id = new mongo.ObjectId(products._id);
 	}
 	
-	mongo.remove("products", { "code": "DEV"}, function(error){
-		if(error){
+	mongo.remove("products", {"code": "DEV"}, function (error) {
+		if (error) {
 			return cb(error);
 		}
 		
@@ -108,20 +108,20 @@ function addTenants(cb) {
 		tenant.applications.forEach(function (oneApp) {
 			oneApp.appId = new mongo.ObjectId(oneApp.appId.toString());
 			
-			oneApp.keys.forEach(function(oneKey){
+			oneApp.keys.forEach(function (oneKey) {
 				generateExternalKey({
 					key: oneKey.key,
 					tenantId: tenant._id,
 					package: oneApp.package,
 					secret: keySecurity
-				}, function(error, externalKey){
-					if(error){
+				}, function (error, externalKey) {
+					if (error) {
 						return cb(error);
 					}
 					oneKey.extKeys[0].extKey = externalKey;
-					count ++;
+					count++;
 					
-					if (count === tenants.length){
+					if (count === tenants.length) {
 						storeTenants();
 					}
 				});
@@ -129,10 +129,10 @@ function addTenants(cb) {
 		});
 	});
 	
-	function storeTenants(){
+	function storeTenants() {
 		var tenantsList = ["DETE", "DET1", "DET2", "DET3", "DET4"];
-		mongo.remove("tenants", {"code": {"$in": tenantsList}}, function(error){
-			if(error){
+		mongo.remove("tenants", {"code": {"$in": tenantsList}}, function (error) {
+			if (error) {
 				return cb(error);
 			}
 			
@@ -149,78 +149,123 @@ function addTenants(cb) {
 	}
 }
 
-function modifyDashboardDefaults(cb){
-	mongo.findOne("products", {"code":"DSBRD", "locked": true}, function(error, dsbrdProduct){
-		if(error){
+function modifyDashboardDefaults(cb) {
+	mongo.findOne("products", {"code": "DSBRD", "locked": true}, function (error, dsbrdProduct) {
+		if (error) {
 			return cb(error);
 		}
 		
-		dsbrdProduct.packages.forEach(function(onePackage){
-			if(onePackage.code === "DSBRD_OWNER"){
-				if(!onePackage.acl.dev){
+		dsbrdProduct.packages.forEach(function (onePackage) {
+			if (onePackage.code === "DSBRD_OWNER") {
+				if (!onePackage.acl.dev) {
 					onePackage.acl.dev = {};
 				}
 				
-				onePackage.acl.dev.quickdemo = { "access": false };
+				onePackage.acl.dev.quickdemo = {"access": false};
 				
 				onePackage.acl.dev.urac = {
-					"access" : [ "owner" ],
-					"apisPermission" : "restricted",
-					"get" : {
-						"apis" : {
-							"/owner/admin/users/count" : { "access": false },
-							"/owner/admin/listUsers" : { "access": false },
-							"/owner/admin/changeUserStatus" : { "access": false },
-							"/owner/admin/getUser" : { "access": false },
-							"/owner/admin/group/list" : { "access": false },
-							"/owner/admin/tokens/list" : { "access": false }
+					"access": ["owner"],
+					"apisPermission": "restricted",
+					"get": {
+						"apis": {
+							"/owner/admin/users/count": {"access": false},
+							"/owner/admin/listUsers": {"access": false},
+							"/owner/admin/changeUserStatus": {"access": false},
+							"/owner/admin/getUser": {"access": false},
+							"/owner/admin/group/list": {"access": false},
+							"/owner/admin/tokens/list": {"access": false}
 						}
 					},
-					"post" : {
-						"apis" : {
-							"/owner/admin/addUser" : { "access": false },
-							"/owner/admin/editUser" : { "access": false },
-							"/owner/admin/editUserConfig" : { "access": false },
-							"/owner/admin/group/add" : { "access": false },
-							"/owner/admin/group/edit" : { "access": false },
-							"/owner/admin/group/addUsers" : { "access": false }
+					"post": {
+						"apis": {
+							"/owner/admin/addUser": {"access": false},
+							"/owner/admin/editUser": {"access": false},
+							"/owner/admin/editUserConfig": {"access": false},
+							"/owner/admin/group/add": {"access": false},
+							"/owner/admin/group/edit": {"access": false},
+							"/owner/admin/group/addUsers": {"access": false}
 						}
 					},
-					"delete" : {
-						"apis" : {
-							"/owner/admin/group/delete" : { "access": false },
-							"/owner/admin/tokens/delete" : { "access": false }
+					"delete": {
+						"apis": {
+							"/owner/admin/group/delete": {"access": false},
+							"/owner/admin/tokens/delete": {"access": false}
 						}
 					}
 				};
 			}
 		});
 		
-		mongo.save("products", dsbrdProduct, function(error){
-			if(error){
+		mongo.save("products", dsbrdProduct, function (error) {
+			if (error) {
 				return cb(error);
 			}
 			
-			mongo.findOne("tenants", {"code": "DBTN", "locked": true}, function(error, dbtnTenant){
-				if(error){
+			mongo.findOne("tenants", {"code": "DBTN", "locked": true}, function (error, dbtnTenant) {
+				if (error) {
 					return cb(error);
 				}
 				
-				dbtnTenant.applications.forEach(function(oneApplication){
-					if(oneApplication.package == "DSBRD_OWNER"){
-						oneApplication.keys.forEach(function(oneKey){
-							if(!oneKey.config.dev){
+				dbtnTenant.applications.forEach(function (oneApplication) {
+					if (oneApplication.package == "DSBRD_OWNER") {
+						oneApplication.keys.forEach(function (oneKey) {
+							if (!oneKey.config.dev) {
 								oneKey.config.dev = {};
 							}
-							oneKey.config.dev['demo'] = { "model":"memory" };
+							oneKey.config.dev['demo'] = {"model": "memory"};
+							
+							generateExternalKey({
+								key: oneKey.key,
+								tenantId: dbtnTenant._id,
+								package: oneApplication.package,
+								secret: keySecurity
+							}, function (error, externalKey) {
+								if (error) {
+									return cb(error);
+								}
+								
+								for (var i = oneKey.extKeys.length - 1; i >= 0; i--) {
+									if (oneKey.extKeys[i].env === 'DEV') {
+										oneKey.extKeys.splice(i, 1);
+									}
+								}
+								
+								oneKey.extKeys.push({
+									"extKey": externalKey,
+									"device": {},
+									"geo": {},
+									"env": "DEV"
+								});
+								
+								mongo.remove("dashboard_extKeys", {"env": "DEV", "code": "DBTN"}, function (error) {
+									if (error) {
+										return cb(error);
+									}
+									mongo.insert("dashboard_extKeys", {
+										"env": "DEV",
+										"code": "DBTN",
+										"key": externalKey
+									}, function (error) {
+										if (error) {
+											return cb(error);
+										}
+										
+										storeTenant(dbtnTenant);
+									});
+								});
+							});
 						});
 					}
 				});
 				
-				mongo.save("tenants", dbtnTenant, cb);
+				
 			});
 		});
 	});
+	
+	function storeTenant(dbtnTenant) {
+		mongo.save("tenants", dbtnTenant, cb);
+	}
 }
 
 async.series([cloneEnvironment, addProducts, addTenants, modifyDashboardDefaults], function (error) {
