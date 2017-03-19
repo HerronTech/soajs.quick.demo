@@ -34,6 +34,9 @@ module.exports = {
   "injection": true,
   "oauth": false,
   "session": true,
+  "demo":{
+  	"model": "memory"
+  },
   "errors": {
     "400": "unsuccessful update",
     "401": "user id not found",

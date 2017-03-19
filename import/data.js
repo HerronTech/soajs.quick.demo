@@ -62,12 +62,17 @@ function cloneEnvironment(cb) {
 		env.services = dashboardRecord.services;
 		
 		keySecurity = dashboardRecord.services.config.key;
-		mongo.insert("environment", env, {upsert: true, multi: false, safe: true}, function (error, result) {
-			if (error) {
+		mongo.remove("environment", {"code": "DEV"}, function(error){
+			if(error){
 				return cb(error);
 			}
-			console.log("Dev environment added");
-			return cb();
+			mongo.insert("environment", env, {upsert: true, multi: false, safe: true}, function (error, result) {
+				if (error) {
+					return cb(error);
+				}
+				console.log("Dev environment added");
+				return cb();
+			});
 		});
 	});
 }
@@ -77,13 +82,20 @@ function addProducts(cb) {
 	if (products._id){
 		products._id = new mongo.ObjectId(products._id);
 	}
-	mongo.insert("products", products, {upsert: true, multi: false, safe: true}, function (err, results) {
-		if (err) {
-			return cb(err);
+	
+	mongo.remove("products", { "code": "DEV"}, function(error){
+		if(error){
+			return cb(error);
 		}
 		
-		console.log("Products added");
-		return cb();
+		mongo.insert("products", products, {upsert: true, multi: false, safe: true}, function (err, results) {
+			if (err) {
+				return cb(err);
+			}
+			
+			console.log("Products added");
+			return cb();
+		});
 	});
 }
 
@@ -118,19 +130,100 @@ function addTenants(cb) {
 	});
 	
 	function storeTenants(){
-		mongo.insert("tenants", tenants, {upsert: true, multi: true, safe: true}, function (err) {
-			if (err) {
-				return cb(err);
+		var tenantsList = ["DETE", "DET1", "DET2", "DET3", "DET4"];
+		mongo.remove("tenants", {"code": {"$in": tenantsList}}, function(error){
+			if(error){
+				return cb(error);
 			}
-			else {
-				console.log("Tenants added");
-			}
-			return cb();
+			
+			mongo.insert("tenants", tenants, {upsert: true, multi: true, safe: true}, function (err) {
+				if (err) {
+					return cb(err);
+				}
+				else {
+					console.log("Tenants added");
+				}
+				return cb();
+			});
 		});
 	}
 }
 
-async.series([cloneEnvironment, addProducts, addTenants], function (error) {
+function modifyDashboardDefaults(cb){
+	mongo.findOne("products", {"code":"DSBRD", "locked": true}, function(error, dsbrdProduct){
+		if(error){
+			return cb(error);
+		}
+		
+		dsbrdProduct.packages.forEach(function(onePackage){
+			if(onePackage.code === "DSBRD_OWNER"){
+				if(!onePackage.acl.dev){
+					onePackage.acl.dev = {};
+				}
+				
+				onePackage.acl.dev.quickdemo = { "access": false };
+				
+				onePackage.acl.dev.urac = {
+					"access" : [ "owner" ],
+					"apisPermission" : "restricted",
+					"get" : {
+						"apis" : {
+							"/owner/admin/users/count" : { "access": false },
+							"/owner/admin/listUsers" : { "access": false },
+							"/owner/admin/changeUserStatus" : { "access": false },
+							"/owner/admin/getUser" : { "access": false },
+							"/owner/admin/group/list" : { "access": false },
+							"/owner/admin/tokens/list" : { "access": false }
+						}
+					},
+					"post" : {
+						"apis" : {
+							"/owner/admin/addUser" : { "access": false },
+							"/owner/admin/editUser" : { "access": false },
+							"/owner/admin/editUserConfig" : { "access": false },
+							"/owner/admin/group/add" : { "access": false },
+							"/owner/admin/group/edit" : { "access": false },
+							"/owner/admin/group/addUsers" : { "access": false }
+						}
+					},
+					"delete" : {
+						"apis" : {
+							"/owner/admin/group/delete" : { "access": false },
+							"/owner/admin/tokens/delete" : { "access": false }
+						}
+					}
+				};
+			}
+		});
+		
+		mongo.save("products", dsbrdProduct, function(error){
+			if(error){
+				return cb(error);
+			}
+			
+			mongo.findOne("tenants", {"code": "DBTN", "locked": true}, function(error, dbtnTenant){
+				if(error){
+					return cb(error);
+				}
+				
+				dbtnTenant.applications.forEach(function(oneApplication){
+					if(oneApplication.package == "DSBRD_OWNER"){
+						oneApplication.keys.forEach(function(oneKey){
+							if(!oneKey.config.dev){
+								oneKey.config.dev = {};
+							}
+							oneKey.config.dev['demo'] = { "model":"memory" };
+						});
+					}
+				});
+				
+				mongo.save("tenants", dbtnTenant, cb);
+			});
+		});
+	});
+}
+
+async.series([cloneEnvironment, addProducts, addTenants, modifyDashboardDefaults], function (error) {
 	if (error) {
 		throw error;
 	}
