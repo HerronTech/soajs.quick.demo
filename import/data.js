@@ -5,7 +5,7 @@ var mongo = new soajs.mongo(dbconfig);
 var keySecurity = "";
 
 function generateExternalKey(opts, cb) {
-	var module = require("soajs/modules/soajs.core").key;
+	var module = require("soajs.core.modules/soajs.core").key;
 	var key = opts.key;
 	
 	var tenant = {
