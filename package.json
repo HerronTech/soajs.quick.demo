@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:soajs/soajs.examples.git"
+    "url": "git@github.com:soajs/soajs.quick.demo.git"
   },
   "license" : "Apache-2.0",
   "engines": {
