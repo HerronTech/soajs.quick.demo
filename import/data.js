@@ -4,6 +4,24 @@ var mongo = new soajs.mongo(dbconfig);
 
 var keySecurity = "";
 
+function addRecipes(cb){
+	var catalogs = require('./catalogs/');
+	mongo.remove("catalogs", {"name": {"$in": ['Dev Nginx Recipe', 'Dev Service Recipe']}}, function (error) {
+		if (error) {
+			return cb(error);
+		}
+		
+		mongo.insert("catalogs", catalogs, {upsert: true, multi: false, safe: true}, function (err, results) {
+			if (err) {
+				return cb(err);
+			}
+			
+			console.log("Catalogs added");
+			return cb();
+		});
+	});
+}
+
 function generateExternalKey(opts, cb) {
 	var module = require("soajs").core.key;
 	var key = opts.key;
@@ -268,7 +286,7 @@ function modifyDashboardDefaults(cb) {
 	}
 }
 
-async.series([cloneEnvironment, addProducts, addTenants, modifyDashboardDefaults], function (error) {
+async.series([addRecipes, cloneEnvironment, addProducts, addTenants, modifyDashboardDefaults], function (error) {
 	if (error) {
 		throw error;
 	}
