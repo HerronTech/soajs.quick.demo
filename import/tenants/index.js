@@ -26,7 +26,7 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"demo": {
+								"quickdemo": {
 									"model": "memory"
 								}
 							}
@@ -63,7 +63,7 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"demo": {
+								"quickdemo": {
 									"model": "mongo",
 									"MT": false
 								}
@@ -101,7 +101,7 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"demo": {
+								"quickdemo": {
 									"model": "mongo",
 									"MT": false
 								}
@@ -139,7 +139,7 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"demo": {
+								"quickdemo": {
 									"model": "mongo",
 									"MT": true
 								}
@@ -177,7 +177,7 @@ var tenants = [
 						],
 						"config": {
 							"dev": {
-								"demo": {
+								"quickdemo": {
 									"model": "mongo",
 									"MT": true
 								}
