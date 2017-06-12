@@ -4,7 +4,7 @@ var mongo = new soajs.mongo(dbconfig);
 
 var keySecurity = "";
 
-function addRecipes(cb){
+function addRecipes(cb) {
 	var catalogs = require('./catalogs/');
 	mongo.remove("catalogs", {"name": {"$in": ['Dev Nginx Recipe', 'Dev Service Recipe']}}, function (error) {
 		if (error) {
@@ -254,29 +254,11 @@ function modifyDashboardDefaults(cb) {
 									"geo": {},
 									"env": "DEV"
 								});
-								
-								mongo.remove("dashboard_extKeys", {"env": "DEV", "code": "DBTN"}, function (error) {
-									if (error) {
-										return cb(error);
-									}
-									mongo.insert("dashboard_extKeys", {
-										"env": "DEV",
-										"code": "DBTN",
-										"key": externalKey
-									}, function (error) {
-										if (error) {
-											return cb(error);
-										}
-										
-										storeTenant(dbtnTenant);
-									});
-								});
+								storeTenant(dbtnTenant);
 							});
 						});
 					}
 				});
-				
-				
 			});
 		});
 	});
