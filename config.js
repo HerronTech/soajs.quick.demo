@@ -24,6 +24,7 @@ module.exports = {
     "path": __dirname + "/lib/models/",
     "name": "mongo"
   },
+  "swaggerFilename": "swagger.yml",
   "serviceName": "quickdemo",
   "serviceGroup": "demo",
   "serviceVersion": 1,
