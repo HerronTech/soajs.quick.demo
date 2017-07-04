@@ -4,7 +4,7 @@ var dev = {
 	"sitePrefix": "dev",
 	"apiPrefix": "dev-api",
 	"port": 81,
-	"profile": "/opt/soajs/FILES/profiles/profile.js",
+	"profile": "/opt/soajs/node_modules/soajs.core.modules/profiles/single.js",
 	"description": "this is the DEV environment",
 	"dbs": {
 		"clusters": {
