@@ -122,7 +122,12 @@ function addTenants(cb) {
 	
 	var count = 0;
 	tenants.forEach(function (tenant) {
-		tenant._id = mongo.ObjectId(tenant._id);
+		if(tenant._id){
+			tenant._id = mongo.ObjectId(tenant._id);
+		}
+		else{
+			tenant._id = mongo.ObjectId();
+		}
 		tenant.applications.forEach(function (oneApp) {
 			oneApp.appId = new mongo.ObjectId(oneApp.appId.toString());
 			

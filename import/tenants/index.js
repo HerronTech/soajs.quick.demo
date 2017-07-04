@@ -1,6 +1,5 @@
 var tenants = [
 	{
-		"_id": '58bd20bc06f3698ba308dc18',
 		"type": "client",
 		"code": "DETE",
 		"name": "Demo tenant 1",
@@ -37,7 +36,6 @@ var tenants = [
 		]
 	},
 	{
-		"_id": '58bd22ef06f3698ba308dc19',
 		"type": "client",
 		"code": "DET1",
 		"name": "Demo tenant 2",
@@ -75,7 +73,6 @@ var tenants = [
 		]
 	},
 	{
-		"_id": '58bd234e06f3698ba308dc1a',
 		"type": "client",
 		"code": "DET2",
 		"name": "Demo tenant 3",
@@ -113,7 +110,6 @@ var tenants = [
 		]
 	},
 	{
-		"_id": '58bd239506f3698ba308dc1b',
 		"type": "client",
 		"code": "DET3",
 		"name": "Demo tenant 4",
@@ -151,7 +147,6 @@ var tenants = [
 		]
 	},
 	{
-		"_id": '58bd23aa06f3698ba308dc1c',
 		"type": "client",
 		"code": "DET4",
 		"name": "Demo tenant 5",
