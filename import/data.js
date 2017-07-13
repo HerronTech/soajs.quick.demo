@@ -235,7 +235,7 @@ function modifyDashboardDefaults(cb) {
 							if (!oneKey.config.dev) {
 								oneKey.config.dev = {};
 							}
-							oneKey.config.dev['demo'] = {"model": "memory"};
+							oneKey.config.dev['quickdemo'] = {"model": "memory"};
 							
 							generateExternalKey({
 								key: oneKey.key,
