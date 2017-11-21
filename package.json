@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "lodash": "4.17.4",
-    "stdio": "*",
-    "soajs.composer": "1.0.*"
+    "stdio": "0.2.7",
+    "soajs.composer": "2.0.0"
   }
 }
