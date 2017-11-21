@@ -69,10 +69,6 @@ var recipes = [
 						"type": "computed",
 						"value": "$SOAJS_ENV"
 					},
-					"SOAJS_EXTKEY": {
-						"type": "computed",
-						"value": "$SOAJS_EXTKEY"
-					},
 					"SOAJS_NX_DOMAIN": {
 						"type": "computed",
 						"value": "$SOAJS_NX_DOMAIN"
@@ -104,10 +100,6 @@ var recipes = [
 					"SOAJS_HA_NAME": {
 						"type": "computed",
 						"value": "$SOAJS_HA_NAME"
-					},
-					"SOAJS_GIT_DASHBOARD_BRANCH": {
-						"type": "static",
-						"value": "develop"
 					}
 				},
 				"cmd": {
