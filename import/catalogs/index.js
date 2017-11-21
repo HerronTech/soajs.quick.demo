@@ -1,7 +1,8 @@
 var recipes = [
 	{
 		"name": "Dev Nginx Recipe",
-		"type": "nginx",
+		"type": "server",
+		"subtype": "nginx",
 		"description": "This is the nginx catalog recipe used to deploy the nginx in the dev environment.",
 		"recipe": {
 			"deployOptions": {
@@ -23,12 +24,12 @@ var recipes = [
 					"failureThreshold": 3
 				},
 				"restartPolicy": {
-					"condition": "",
-					"maxAttempts": 0
+					"condition": "any",
+					"maxAttempts": 5
 				},
 				"container": {
-					"network": "",
-					"workingDir": ""
+					"network": "soajsnet",
+					"workingDir": "/opt/soajs/deployer/"
 				},
 				"voluming": {
 					"volumes": [
@@ -36,6 +37,12 @@ var recipes = [
 							"Type": "volume",
 							"Source": "soajs_log_volume",
 							"Target": "/var/log/soajs/"
+						},
+						{
+							"Type": "bind",
+							"ReadOnly": true,
+							"Source": "/var/run/docker.sock",
+							"Target": "/var/run/docker.sock"
 						}
 					]
 				},
@@ -44,13 +51,15 @@ var recipes = [
 						"name": "http",
 						"target": 80,
 						"isPublished": true,
-						"published": 81
+						"published": 81,
+						"preserveClientIP": true
 					},
 					{
 						"name": "https",
 						"target": 443,
 						"isPublished": true,
-						"published": 444
+						"published": 444,
+						"preserveClientIP": true
 					}
 				]
 			},
@@ -59,6 +68,10 @@ var recipes = [
 					"SOAJS_ENV": {
 						"type": "computed",
 						"value": "$SOAJS_ENV"
+					},
+					"SOAJS_EXTKEY": {
+						"type": "computed",
+						"value": "$SOAJS_EXTKEY"
 					},
 					"SOAJS_NX_DOMAIN": {
 						"type": "computed",
@@ -91,28 +104,29 @@ var recipes = [
 					"SOAJS_HA_NAME": {
 						"type": "computed",
 						"value": "$SOAJS_HA_NAME"
+					},
+					"SOAJS_GIT_DASHBOARD_BRANCH": {
+						"type": "static",
+						"value": "develop"
 					}
 				},
 				"cmd": {
 					"deploy": {
 						"command": [
-							"bash",
-							"-c"
+							"bash"
 						],
 						"args": [
+							"-c",
 							"node index.js -T nginx"
 						]
 					}
 				}
 			}
-		},
-		"v": 1,
-		"ts": 1496302762683
-	},
-	{
+		}
+	}, {
 		"name": "Dev Service Recipe",
-		"type": "soajs",
-		"subtype": "service",
+		"type": "service",
+		"subtype": "soajs",
 		"description": "This is the service catalog recipe used to deploy the core services in the dev environment.",
 		"recipe": {
 			"deployOptions": {
@@ -135,12 +149,12 @@ var recipes = [
 					"failureThreshold": 3
 				},
 				"restartPolicy": {
-					"condition": "",
-					"maxAttempts": 0
+					"condition": "any",
+					"maxAttempts": 5
 				},
 				"container": {
-					"network": "",
-					"workingDir": ""
+					"network": "soajsnet",
+					"workingDir": "/opt/soajs/deployer/"
 				},
 				"voluming": {
 					"volumes": [
@@ -166,6 +180,10 @@ var recipes = [
 					"NODE_ENV": {
 						"type": "static",
 						"value": "production"
+					},
+					"NODE_TLS_REJECT_UNAUTHORIZED": {
+						"type": "static",
+						"value": "0"
 					},
 					"SOAJS_ENV": {
 						"type": "computed",
@@ -194,6 +212,14 @@ var recipes = [
 					"SOAJS_GC_VERSION": {
 						"type": "computed",
 						"value": "$SOAJS_GC_VERSION"
+					},
+					"SOAJS_GIT_PROVIDER": {
+						"type": "computed",
+						"value": "$SOAJS_GIT_PROVIDER"
+					},
+					"SOAJS_GIT_DOMAIN": {
+						"type": "computed",
+						"value": "$SOAJS_GIT_DOMAIN"
 					},
 					"SOAJS_GIT_OWNER": {
 						"type": "computed",
@@ -259,19 +285,16 @@ var recipes = [
 				"cmd": {
 					"deploy": {
 						"command": [
-							"bash",
-							"-c"
+							"bash"
 						],
 						"args": [
+							"-c",
 							"node index.js -T service"
 						]
 					}
 				}
 			}
-		},
-		"v": 1,
-		"ts": 1496302777071
-	}
-];
+		}
+	}];
 
 module.exports = recipes;

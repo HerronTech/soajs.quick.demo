@@ -62,23 +62,13 @@ function cloneEnvironment(cb) {
 		if (error) {
 			return cb(error);
 		}
-		
 		var env = require('./environment/dev.js');
 		env._id = mongo.ObjectId();
-		
 		env.deployer = dashboardRecord.deployer;
-		
-		env.dbs.clusters['dev_cluster'] = dashboardRecord.dbs.clusters.dash_cluster;
-		
 		env.dbs.config = dashboardRecord.dbs.config;
-		env.dbs.config.session.cluster = "dev_cluster";
-		env.dbs.config.session.name = "dev_" + dashboardRecord.dbs.config.session.name;
-		
+		env.dbs.session.name = "dev_" + dashboardRecord.dbs.session.name;
 		env.dbs.databases.urac = dashboardRecord.dbs.databases.urac;
-		env.dbs.databases.urac.cluster = "dev_cluster";
-		
 		env.services = dashboardRecord.services;
-		
 		keySecurity = dashboardRecord.services.config.key;
 		mongo.remove("environment", {"code": "DEV"}, function (error) {
 			if (error) {

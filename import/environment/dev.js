@@ -4,36 +4,35 @@ var dev = {
 	"sitePrefix": "dev",
 	"apiPrefix": "dev-api",
 	"port": 81,
-	"profile": "/opt/soajs/node_modules/soajs.core.modules/profiles/single.js",
+	"protocol": "http",
+	"profile": "/opt/soajs/FILES/profiles/profile.js",
 	"description": "this is the DEV environment",
 	"dbs": {
-		"clusters": {
-			"dev_cluster": {}
-		},
 		"config": {
-			"prefix": "",
-			"session": {
-				"cluster": "dev_cluster",
-				"name": "core_session",
-				"store": {},
-				"collection": "sessions",
-				"stringify": false,
-				"expireAfter": 1209600000
-			}
+			"prefix": ""
 		},
 		"databases": {
 			"urac": {
-				"cluster": "dev_cluster",
+				"cluster": "dash_cluster",
 				"tenantSpecific": true
 			},
 			"demo_SA": {
-				"cluster": "dev_cluster",
+				"cluster": "dash_cluster",
 				"tenantSpecific": false
 			},
 			"demo_MT": {
-				"cluster": "dev_cluster",
+				"cluster": "dash_cluster",
 				"tenantSpecific": true
 			}
+		},
+		"session": {
+			"cluster": "dash_cluster",
+			"name": "core_session",
+			"store": {},
+			"collection": "sessions",
+			"stringify": false,
+			"tenantSpecific": false,
+			"expireAfter": 1209600000
 		}
 	}
 };
