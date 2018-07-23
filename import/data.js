@@ -78,8 +78,30 @@ function cloneEnvironment(cb) {
 				if (error) {
 					return cb(error);
 				}
-				console.log("Dev environment added");
-				return cb();
+
+
+               mongo.findOne("infra", {
+                    "deployments.environments": {"$in": ["DASHBOARD"]}
+                }, (error, infraProvider) => {
+                   if (error) {
+                       return cb(error);
+                   }
+
+                   if(!infraProvider){
+                   	   return cb(null, true);
+				   }
+
+                   var deployments = infraProvider.deployments;
+                   deployments.forEach(function(deployment){
+                       if(deployment.environments.indexOf("DEV") === -1){
+                           deployment.environments.push("DEV");
+                       }
+
+				   });
+
+                   console.log("Dev environment added");
+                   mongo.save("infra", infraProvider, cb);
+                });
 			});
 		});
 	});
