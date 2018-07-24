@@ -65,6 +65,10 @@ var recipes = [
 			},
 			"buildOptions": {
 				"env": {
+                    "NODE_TLS_REJECT_UNAUTHORIZED": {
+                        "type": "static",
+                        "value": "0"
+                    },
 					"SOAJS_ENV": {
 						"type": "computed",
 						"value": "$SOAJS_ENV"
@@ -169,6 +173,10 @@ var recipes = [
 					"accelerateDeployment": true
 				},
 				"env": {
+                    "NODE_TLS_REJECT_UNAUTHORIZED": {
+                        "type": "static",
+                        "value": "0"
+                    },
 					"NODE_ENV": {
 						"type": "static",
 						"value": "production"
