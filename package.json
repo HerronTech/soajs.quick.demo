@@ -33,8 +33,8 @@
     "shelljs": "0.7.5"
   },
   "dependencies": {
-    "lodash": "4.17.4",
+    "lodash": "4.17.11",
     "stdio": "0.2.7",
-    "soajs.composer": "2.0.1"
+    "soajs.composer": "2.4.5"
   }
 }
